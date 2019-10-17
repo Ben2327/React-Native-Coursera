@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, ScrollView } from 'react-native';
 import { Card, ListItem } from 'react-native-elements';
-import { LEADERS } from '../shared/leaders';
+import { connect } from 'react-redux';
+import { baseUrl } from '../shared/baseUrl';
 
-export default class AboutUs extends Component {
+const mapStateToProps = state => {
+    return {
+      leaders: state.leaders
+    }
+  }
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            leaders: LEADERS
-        };
-    };
+class AboutUs extends Component {
+
+
 
 
     static navigationOptions = {
@@ -24,7 +26,7 @@ export default class AboutUs extends Component {
                     title={item.name}
                     subtitle={item.description}
                     hideChevron={true}
-                    leftAvatar={{ source: require('./images/alberto.png') }}
+                    leftAvatar={{source: {uri: baseUrl + item.image}}}
                 />
             )
         }
@@ -39,15 +41,20 @@ export default class AboutUs extends Component {
                         The restaurant traces its humble beginnings to The Frying Pan, a successful chain started by our CEO, Mr. Peter Pan, that featured for the first time the world's best cuisines in a pan.
                     </Text>
                 </Card>
+                <View style={{marginBottom:20}}>
                 <Card
                     title='Corporate Leadership'
                 >
-                    <FlatList
-                        data={this.state.leaders}
-                        renderItem={renderLeaderItem}
-                        keyExtractor={item => item.id.toString()} />
+                    <FlatList 
+                    data={this.props.leaders.leaders}
+                    renderItem={renderLeaderItem}
+                    keyExtractor={item => item.id.toString()}
+                    />
                 </Card>
+                </View>
             </ScrollView>
         );
     }
-}
+};
+
+export default connect(mapStateToProps)(AboutUs);
