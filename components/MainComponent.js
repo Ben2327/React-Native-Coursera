@@ -11,19 +11,19 @@ import { connect } from 'react-redux';
 import { fetchDishes, fetchComments, fetchPromos, fetchLeaders } from '../redux/ActionCreators';
 
 const mapStateToProps = state => {
-  return {
-    dishes: state.dishes,
-    comments: state.comments,
-    promotions: state.promotions,
-    leaders: state.leaders
-  }
+    return {
+        dishes: state.dishes,
+        comments: state.comments,
+        promotions: state.promotions,
+        leaders: state.leaders
+    }
 }
 const mapDispatchToProps = dispatch => ({
     fetchDishes: () => dispatch(fetchDishes()),
     fetchComments: () => dispatch(fetchComments()),
     fetchPromos: () => dispatch(fetchPromos()),
     fetchLeaders: () => dispatch(fetchLeaders()),
-  })
+});
 
 const MenuNavigator = createStackNavigator({
     Menu: {
@@ -110,12 +110,12 @@ const CustomDrawerContentComponent = (props) => (
     <ScrollView style={{ flex: 1 }}>
         <View style={styles.drawerHeader}>
             <View style={{ flex: 1 }}>
-                <Image source={require('./images/logo.png')}
+                <Image source={require('./images/kukdookuu.png')}
                     style={styles.drawerImage} />
             </View>
             <View style={{ flex: 2 }}>
                 <Text style={styles.drawerHeaderText}>
-                    Restaurant lalalala
+                    KUK-DOO-KUU
                     </Text>
             </View>
         </View>
@@ -208,7 +208,7 @@ class Main extends Component {
         this.props.fetchComments();
         this.props.fetchPromos();
         this.props.fetchLeaders();
-      }
+    }
     render() {
         return (
             <View style={{ flex: 1 }}>
@@ -225,7 +225,7 @@ class Main extends Component {
 const styles = StyleSheet.create({
     drawerHeader: {
         backgroundColor: '#512D',
-        height: 140,
+        height: 180,
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1,
@@ -234,13 +234,18 @@ const styles = StyleSheet.create({
     drawerHeaderText: {
         color: 'white',
         fontSize: 24,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        margin: 10
+        
 
     },
     drawerImage: {
         margin: 10,
-        width: 80,
-        height: 60
+        width: 90,
+        height: 80,
+        backgroundColor: 'white',
+        borderWidth: 45,
+        borderRadius: 10
     }
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
